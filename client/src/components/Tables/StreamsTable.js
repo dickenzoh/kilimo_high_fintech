@@ -15,9 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const StreamsTable = (streamData) => {
   const navigate = useNavigate();
-
   const handleViewStream = (stream) => {
-    console.log("Streams");
     navigate("/singlestream", {
       state: { streamData: stream },
     });
@@ -42,11 +40,6 @@ const StreamsTable = (streamData) => {
               </TableCell>
               <TableCell>
                 <Typography sx={{ color: "white", fontWeight: 500 }}>
-                  Number of student
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography sx={{ color: "white", fontWeight: 500 }}>
                   Action
                 </Typography>
               </TableCell>
@@ -62,8 +55,7 @@ const StreamsTable = (streamData) => {
                 }
               >
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{item.streamname}</TableCell>
-                <TableCell>{item.students.length}</TableCell>
+                <TableCell>{item.name}</TableCell>
                 <TableCell>
                   <Button
                     onClick={() => handleViewStream(item)}

@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import useStyles from "./styles";
 
@@ -36,9 +36,51 @@ const Register = () => {
     },
   ];
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log("Register");
+  const [streamData, setData] = useState([]);
+
+  console.log(streamData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3008/streams/class-streams"
+        );
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("http://localhost:3008/students/students", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          age: formData.age,
+          classStreamId: formData.stream,
+        }),
+      });
+
+      if (response.ok) {
+        // Handle success, e.g., display a success message or redirect
+      } else {
+        console.error("Error registering student:", response.statusText);
+        // Handle error, e.g., display an error message
+      }
+    } catch (error) {
+      console.error("Error registering student:", error);
+      // Handle error, e.g., display an error message
+    }
   };
 
   const handleChange = (e) => {
@@ -82,9 +124,9 @@ const Register = () => {
               helperText="Please select stream"
               onChange={handleChange}
             >
-              {streams.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+              {streamData.map((option) => (
+                <option key={option.name} value={option._id}>
+                  {option.name}
                 </option>
               ))}
             </TextField>

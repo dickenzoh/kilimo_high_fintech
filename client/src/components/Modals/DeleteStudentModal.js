@@ -12,7 +12,6 @@ export default function DeleteStudentModal(props) {
   const [open, setOpen] = React.useState(false);
 
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,9 +21,26 @@ export default function DeleteStudentModal(props) {
     setOpen(false);
   };
 
-  const handleDelete = () => {
-    console.log("deleted");
-    handleClose();
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3008/students/students/${props.studentId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        handleClose();
+        // Handle success, e.g., display a success message or update the student list
+      } else {
+        console.error("Error deleting student:", response.statusText);
+        // Handle error, e.g., display an error message
+      }
+    } catch (error) {
+      console.error("Error deleting student:", error);
+      // Handle error, e.g., display an error message
+    }
   };
 
   return (

@@ -15,7 +15,6 @@ export default function EditStudentModal(props) {
   const location = useLocation();
 
   const handleClickOpen = () => {
-    console.log("opening");
     setOpen(true);
   };
 

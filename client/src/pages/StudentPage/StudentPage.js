@@ -36,7 +36,7 @@ const StudentPage = () => {
         <Grid item>
           <div>
             <p>First Name: {student.firstName}</p>
-            <p>Last Name: {student.lastName}</p>
+            <p>Last Name: {student.secondName}</p>
             <p>Age: {student.age}</p>
           </div>
         </Grid>

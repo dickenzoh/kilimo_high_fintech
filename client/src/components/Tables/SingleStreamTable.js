@@ -19,16 +19,9 @@ const SingleStreamTable = (studentData, streamName) => {
   const navigate = useNavigate();
 
   const handleViewStudent = (student) => {
-    console.log("Stream");
     navigate("/student", {
       state: { studentData: student, streamName: streamName },
     });
-  };
-  const handleEditStudent = () => {
-    console.log("Edit");
-  };
-  const handleDeleteStudent = () => {
-    console.log("Deleted");
   };
 
   return (
@@ -76,7 +69,7 @@ const SingleStreamTable = (studentData, streamName) => {
               >
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{item.firstName}</TableCell>
-                <TableCell>{item.lastName}</TableCell>
+                <TableCell>{item.secondName}</TableCell>
                 <TableCell>{item.age}</TableCell>
                 <TableCell>
                   <Button
@@ -89,7 +82,7 @@ const SingleStreamTable = (studentData, streamName) => {
                     View
                   </Button>
                   <EditStudentModal />
-                  <DeleteStudentModal />
+                  <DeleteStudentModal studentId={item._id} />
                 </TableCell>
               </TableRow>
             ))}
