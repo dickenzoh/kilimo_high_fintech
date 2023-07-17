@@ -16,8 +16,6 @@ import EditStudentModal from "../Modals/EditStudentModal";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 
 const SingleStreamTable = (studentData, streamName) => {
-  console.log(streamName);
-
   const navigate = useNavigate();
 
   const handleViewStudent = (student) => {
@@ -90,24 +88,7 @@ const SingleStreamTable = (studentData, streamName) => {
                   >
                     View
                   </Button>
-                  {/* <Button
-                    onClick={() => handleEditStudent(item)}
-                    variant="contained"
-                    color="success"
-                    borderRadius="4px"
-                    style={{ marginRight: "8px" }}
-                  >
-                    Edit
-                  </Button> */}
                   <EditStudentModal />
-                  {/* <Button
-                    onClick={() => handleDeleteStudent(item)}
-                    variant="contained"
-                    color="error"
-                    borderRadius="4px"
-                  >
-                    Delete
-                  </Button> */}
                   <DeleteStudentModal />
                 </TableCell>
               </TableRow>

@@ -8,7 +8,6 @@ const StudentPage = () => {
 
   const student = location.state.studentData;
   const state = location.state;
-  console.log(state);
 
   return (
     <>

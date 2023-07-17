@@ -13,7 +13,6 @@ export default function EditStudentModal(props) {
   const [open, setOpen] = React.useState(false);
 
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleClickOpen = () => {
     console.log("opening");

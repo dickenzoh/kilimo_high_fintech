@@ -39,7 +39,6 @@ const EditStudent = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     console.log("Register");
-    console.log(formData);
   };
 
   const handleChange = (e) => {
