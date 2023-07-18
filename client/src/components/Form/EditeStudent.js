@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import useStyles from "./styles";
 
@@ -17,56 +17,85 @@ const initialState = {
   stream: "",
 };
 
-const EditStudent = () => {
-  const [formData, setFormData] = useState(initialState);
+const EditStudent = ({ student, handleClose, handleUpdateStudent }) => {
+  const [updatedData, setUpdatedData] = useState(student);
+  const [streamData, setStreamData] = useState([]);
   const classes = useStyles();
 
-  const streams = [
-    {
-      value: "Form1A",
-      label: "Form 1A",
-    },
-    {
-      value: "Form1B",
-      label: "Form 1B",
-    },
-    {
-      value: "Form1C",
-      label: "Form 1C",
-    },
-  ];
-
-  const handleRegister = (e) => {
+  const handleEditStudent = async (e) => {
     e.preventDefault();
-    console.log("Register");
+    const id = updatedData._id;
+    try {
+      const response = await fetch(
+        `http://localhost:3008/students/students/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: updatedData.firstName,
+            secondName: updatedData.secondName,
+            age: updatedData.age,
+            classStreamId: updatedData.stream,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Student updated successfully!");
+        handleClose();
+        handleUpdateStudent(updatedData);
+      } else {
+        console.error("Error updating student:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating student:", error);
+    }
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setUpdatedData({ ...updatedData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3008/streams/class-streams"
+        );
+        const jsonData = await response.json();
+        setStreamData(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
         <Typography variant="h5">Edit Student</Typography>
-        <form className={classes.form} onSubmit={handleRegister}>
+        <form className={classes.form} onSubmit={handleEditStudent}>
           <Grid container spacing={2}>
             <Input
               name="firstName"
-              label="First Name"
+              value={updatedData.firstName}
               handleChange={handleChange}
               autoFocus
               half
             />
             <Input
-              name="lastName"
-              label="Last Name"
+              name="secondName"
+              value={updatedData.secondName}
               handleChange={handleChange}
               half
             />
             <Input
               name="age"
-              label="Age"
+              value={updatedData.age}
               handleChange={handleChange}
               type="number"
             />
@@ -82,9 +111,9 @@ const EditStudent = () => {
               helperText="Please select stream"
               onChange={handleChange}
             >
-              {streams.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+              {streamData.map((option) => (
+                <option key={option._id} value={option._id}>
+                  {option.name}
                 </option>
               ))}
             </TextField>

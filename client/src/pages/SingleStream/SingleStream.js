@@ -12,6 +12,14 @@ const SingleStream = () => {
   const classStreamId = stream._id;
   const streamName = stream.streamname;
 
+  const handleUpdateStudent = (updatedStudent) => {
+    setStudentsData((prevStudents) =>
+      prevStudents.map((student) =>
+        student._id === updatedStudent._id ? updatedStudent : student
+      )
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,6 +57,7 @@ const SingleStream = () => {
       <StudentsTable
         studentsData={studentsData}
         setStudentsData={setStudentsData}
+        handleUpdateStudent={handleUpdateStudent}
       />
     </>
   );

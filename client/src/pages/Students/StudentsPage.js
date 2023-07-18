@@ -4,6 +4,14 @@ import StudentsTable from "../../components/Tables/StudentsTable";
 const StudentsPage = () => {
   const [studentsData, setStudentsData] = useState([]);
 
+  const handleUpdateStudent = (updatedStudent) => {
+    setStudentsData((prevStudents) =>
+      prevStudents.map((student) =>
+        student._id === updatedStudent._id ? updatedStudent : student
+      )
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,6 +38,7 @@ const StudentsPage = () => {
       <StudentsTable
         studentsData={studentsData}
         setStudentsData={setStudentsData}
+        handleUpdateStudent={handleUpdateStudent}
       />
     </>
   );

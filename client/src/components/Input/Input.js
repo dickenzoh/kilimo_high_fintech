@@ -11,6 +11,7 @@ const Input = ({
   autoFocus,
   type,
   handleShowPassword,
+  value,
 }) => {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState("");
@@ -21,6 +22,7 @@ const Input = ({
         name={name}
         onChange={handleChange}
         variant="outlined"
+        value={value}
         required
         fullWidth
         label={label}
@@ -39,7 +41,7 @@ const Input = ({
               }
             : null
         }
-        inputProps={{ min: 1 }}
+        inputProps={{ min: 1, max: 100 }}
       />
     </Grid>
   );

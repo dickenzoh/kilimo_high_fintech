@@ -9,11 +9,7 @@ import { Divider } from "@mui/material";
 import { useLocation, useParams } from "react-router-dom";
 import EditStudent from "../Form/EditeStudent";
 
-export default function EditStudentModal({
-  studentId,
-  studentsData,
-  setStudentsData,
-}) {
+export default function EditStudentModal({ student, handleUpdateStudent }) {
   const [open, setOpen] = React.useState(false);
 
   const location = useLocation();
@@ -46,7 +42,11 @@ export default function EditStudentModal({
       >
         <DialogContent>
           <>
-            <EditStudent />
+            <EditStudent
+              student={student}
+              handleClose={handleClose}
+              handleUpdateStudent={handleUpdateStudent}
+            />
           </>
         </DialogContent>
       </Dialog>

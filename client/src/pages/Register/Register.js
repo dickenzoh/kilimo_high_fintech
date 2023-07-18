@@ -20,7 +20,7 @@ const initialState = {
 
 const Register = () => {
   const [formData, setFormData] = useState(initialState);
-  const [streamData, setData] = useState([]);
+  const [streamData, setStreamData] = useState([]);
 
   const classes = useStyles();
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Register = () => {
           "http://localhost:3008/streams/class-streams"
         );
         const jsonData = await response.json();
-        setData(jsonData);
+        setStreamData(jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
