@@ -12,7 +12,7 @@ import useStyles from "./styles";
 
 const initialState = {
   firstName: "",
-  lastName: "",
+  secondName: "",
   age: "",
   stream: "",
 };
@@ -21,24 +21,20 @@ const Register = () => {
   const [formData, setFormData] = useState(initialState);
   const classes = useStyles();
 
-  const streams = [
-    {
-      value: "Form1A",
-      label: "Form 1A",
-    },
-    {
-      value: "Form1B",
-      label: "Form 1B",
-    },
-    {
-      value: "Form1C",
-      label: "Form 1C",
-    },
-  ];
-
   const [streamData, setData] = useState([]);
 
   console.log(streamData);
+  console.log(formData);
+
+  const clear = () => {
+    //setCurrentId(null);
+    setFormData({
+      firstName: "",
+      secondName: "",
+      age: "",
+      stream: "",
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +52,9 @@ const Register = () => {
     fetchData();
   }, []);
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    console.log(formData);
     try {
       const response = await fetch("http://localhost:3008/students/students", {
         method: "POST",
@@ -65,7 +63,7 @@ const Register = () => {
         },
         body: JSON.stringify({
           firstName: formData.firstName,
-          lastName: formData.lastName,
+          secondName: formData.secondName,
           age: formData.age,
           classStreamId: formData.stream,
         }),
@@ -81,6 +79,7 @@ const Register = () => {
       console.error("Error registering student:", error);
       // Handle error, e.g., display an error message
     }
+    clear();
   };
 
   const handleChange = (e) => {
@@ -96,28 +95,30 @@ const Register = () => {
             <Input
               name="firstName"
               label="First Name"
+              value={formData?.firstName}
               handleChange={handleChange}
               autoFocus
               half
             />
             <Input
-              name="lastName"
-              label="Last Name"
+              name="secondName"
+              label="Second Name"
+              value={formData?.secondName}
               handleChange={handleChange}
               half
             />
             <Input
               name="age"
               label="Age"
+              value={formData?.age}
               handleChange={handleChange}
               type="number"
             />
             <TextField
               id="filled-select-currency-native"
               name="stream"
+              value={formData?.stream}
               select
-              label="Select Stream"
-              defaultValue="Form 1A"
               SelectProps={{
                 native: true,
               }}
@@ -125,7 +126,7 @@ const Register = () => {
               onChange={handleChange}
             >
               {streamData.map((option) => (
-                <option key={option.name} value={option._id}>
+                <option key={option._id} value={option._id}>
                   {option.name}
                 </option>
               ))}

@@ -24,6 +24,7 @@ export const saveStudent = (req, res) => {
 export const editStudent = (req, res) => {
   const { studentId } = req.params;
   const { firstName, secondName, age, classStreamId } = req.body;
+  console.log(req.body);
   Student.findByIdAndUpdate(
     studentId,
     { firstName, secondName, age, classStream: classStreamId },

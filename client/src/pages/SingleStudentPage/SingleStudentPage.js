@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const StudentPage = () => {
+const SingleStudentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -45,4 +45,4 @@ const StudentPage = () => {
   );
 };
 
-export default StudentPage;
+export default SingleStudentPage;

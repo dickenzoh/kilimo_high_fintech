@@ -15,12 +15,13 @@ import { useNavigate } from "react-router-dom";
 import EditStudentModal from "../Modals/EditStudentModal";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 
-const SingleStreamTable = (studentData, streamName) => {
+const StudentsTable = ({ studentsData }) => {
+  console.log(studentsData);
   const navigate = useNavigate();
 
   const handleViewStudent = (student) => {
     navigate("/student", {
-      state: { studentData: student, streamName: streamName },
+      state: { studentData: student },
     });
   };
 
@@ -59,7 +60,7 @@ const SingleStreamTable = (studentData, streamName) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {studentData.studentData.map((item, index) => (
+            {studentsData.map((item, index) => (
               <TableRow
                 style={
                   index % 2 === 0
@@ -93,4 +94,4 @@ const SingleStreamTable = (studentData, streamName) => {
   );
 };
 
-export default SingleStreamTable;
+export default StudentsTable;
