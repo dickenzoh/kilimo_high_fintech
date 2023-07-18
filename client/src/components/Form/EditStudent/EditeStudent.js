@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import Input from "../../components/Input/Input";
+import Input from "../../Input/Input";
 import useStyles from "./styles";
 
 const initialState = {

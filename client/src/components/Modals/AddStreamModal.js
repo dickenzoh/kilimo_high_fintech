@@ -1,18 +1,13 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Divider } from "@mui/material";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import EditStudent from "../Form/EditStudent/EditeStudent";
+import AddStream from "../Form/AddStream/AddStream";
 
-export default function EditStudentModal({ student, handleUpdateStudent }) {
-  const [open, setOpen] = React.useState(false);
-
-  const location = useLocation();
+const AddStreamModal = ({ student, handleUpdateStudent }) => {
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,11 +22,11 @@ export default function EditStudentModal({ student, handleUpdateStudent }) {
       <Button
         onClick={handleClickOpen}
         variant="contained"
-        color="success"
+        color="primary"
         borderRadius="4px"
         style={{ marginRight: "8px" }}
       >
-        Edit
+        Add
       </Button>
 
       <Dialog
@@ -41,15 +36,11 @@ export default function EditStudentModal({ student, handleUpdateStudent }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
-          <>
-            <EditStudent
-              student={student}
-              handleClose={handleClose}
-              handleUpdateStudent={handleUpdateStudent}
-            />
-          </>
+          <AddStream handleClose={handleClose} />
         </DialogContent>
       </Dialog>
     </div>
   );
-}
+};
+
+export default AddStreamModal;

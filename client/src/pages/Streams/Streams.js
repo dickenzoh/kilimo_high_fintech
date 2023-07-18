@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import StreamsTable from "../../components/Tables/StreamsTable";
-import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import AddStreamModal from "../../components/Modals/AddStreamModal";
 
 const Streams = () => {
-  const navigate = useNavigate();
   const [streamData, setData] = useState([]);
 
   useEffect(() => {
@@ -31,7 +30,16 @@ const Streams = () => {
             Streams
           </Typography>
         </Box>
-        <Box></Box>
+      </Box>
+      <Box
+        sx={{
+          mt: 5,
+          display: "flex",
+          justifyContent: "flex-end",
+          color: "primary",
+        }}
+      >
+        <AddStreamModal />
       </Box>
       <StreamsTable streamData={streamData} />
     </>

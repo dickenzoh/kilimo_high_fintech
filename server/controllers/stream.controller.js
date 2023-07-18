@@ -3,6 +3,9 @@ import ClassStream from "../models/stream.model.js";
 // ClassStream controller
 export const saveClassStream = async (req, res) => {
   const { name } = req.body;
+  console.log("naming");
+  console.log(req.body);
+  console.log(name);
   const classStream = new ClassStream({ name });
   classStream.save((err) => {
     if (err) {

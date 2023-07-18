@@ -26,7 +26,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const clear = () => {
-    //setCurrentId(null);
     setFormData({
       firstName: "",
       secondName: "",
