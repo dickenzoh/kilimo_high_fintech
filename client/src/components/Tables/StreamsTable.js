@@ -48,6 +48,7 @@ const StreamsTable = (streamData) => {
           <TableBody>
             {streamData.streamData.map((item, index) => (
               <TableRow
+                key={item._id}
                 style={
                   index % 2 === 0
                     ? { background: "grey" }

@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import useStyles from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   firstName: "",
@@ -19,12 +20,10 @@ const initialState = {
 
 const Register = () => {
   const [formData, setFormData] = useState(initialState);
-  const classes = useStyles();
-
   const [streamData, setData] = useState([]);
 
-  console.log(streamData);
-  console.log(formData);
+  const classes = useStyles();
+  const navigate = useNavigate();
 
   const clear = () => {
     //setCurrentId(null);
@@ -54,7 +53,6 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const response = await fetch("http://localhost:3008/students/students", {
         method: "POST",
@@ -80,6 +78,7 @@ const Register = () => {
       // Handle error, e.g., display an error message
     }
     clear();
+    navigate("/students");
   };
 
   const handleChange = (e) => {

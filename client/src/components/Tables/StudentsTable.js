@@ -15,8 +15,7 @@ import { useNavigate } from "react-router-dom";
 import EditStudentModal from "../Modals/EditStudentModal";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 
-const StudentsTable = ({ studentsData }) => {
-  console.log(studentsData);
+const StudentsTable = ({ studentsData, setStudentsData }) => {
   const navigate = useNavigate();
 
   const handleViewStudent = (student) => {
@@ -62,6 +61,7 @@ const StudentsTable = ({ studentsData }) => {
           <TableBody>
             {studentsData.map((item, index) => (
               <TableRow
+                key={item._id}
                 style={
                   index % 2 === 0
                     ? { background: "grey" }
@@ -83,7 +83,11 @@ const StudentsTable = ({ studentsData }) => {
                     View
                   </Button>
                   <EditStudentModal />
-                  <DeleteStudentModal studentId={item._id} />
+                  <DeleteStudentModal
+                    studentId={item._id}
+                    studentsData={studentsData}
+                    setStudentsData={setStudentsData}
+                  />
                 </TableCell>
               </TableRow>
             ))}

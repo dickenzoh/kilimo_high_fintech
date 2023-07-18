@@ -8,7 +8,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, Divider, Typography } from "@mui/material";
 import { useLocation, useParams } from "react-router-dom";
 
-export default function DeleteStudentModal(props) {
+export default function DeleteStudentModal({
+  studentId,
+  studentsData,
+  setStudentsData,
+}) {
   const [open, setOpen] = React.useState(false);
 
   const location = useLocation();
@@ -24,13 +28,16 @@ export default function DeleteStudentModal(props) {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3008/students/students/${props.studentId}`,
+        `http://localhost:3008/students/students/${studentId}`,
         {
           method: "DELETE",
         }
       );
 
       if (response.ok) {
+        setStudentsData(
+          studentsData.filter((student) => student._id != studentId)
+        );
         handleClose();
         // Handle success, e.g., display a success message or update the student list
       } else {
@@ -60,11 +67,10 @@ export default function DeleteStudentModal(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
         <DialogContent>
           <>
             <Typography style={{ fontWeight: "bold" }}>
-              Are you sure to delete the student?
+              Are you sure to delete the student ?
             </Typography>
             <Box
               sx={{ mt: 5, display: "flex", justifyContent: "space-around" }}

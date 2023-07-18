@@ -23,8 +23,6 @@ const Streams = () => {
     fetchData();
   }, []);
 
-  console.log(streamData);
-
   return (
     <>
       <Box sx={{ mt: 5, display: "flex", justifyContent: "center" }}>
