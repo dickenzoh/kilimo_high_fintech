@@ -19,6 +19,7 @@ const StudentsTable = ({
   studentsData,
   setStudentsData,
   handleUpdateStudent,
+  showSnackbar,
 }) => {
   const navigate = useNavigate();
 
@@ -94,6 +95,7 @@ const StudentsTable = ({
                     studentId={item._id}
                     studentsData={studentsData}
                     setStudentsData={setStudentsData}
+                    showSnackbar={showSnackbar}
                   />
                 </TableCell>
               </TableRow>

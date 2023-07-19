@@ -1,18 +1,15 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Divider } from "@mui/material";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import EditStudent from "../Form/EditStudent/EditeStudent";
+import { Box } from "@mui/material";
+import CustomizedSnackbars from "../SnackBar/CustomizedSnackbar";
 
 export default function EditStudentModal({ student, handleUpdateStudent }) {
-  const [open, setOpen] = React.useState(false);
-
-  const location = useLocation();
+  const [open, setOpen] = useState(false);
+  const [showSnackBar, setShowSnackBar] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,8 +19,21 @@ export default function EditStudentModal({ student, handleUpdateStudent }) {
     setOpen(false);
   };
 
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackBar(false);
+  };
+
   return (
-    <div>
+    <Box>
+      <CustomizedSnackbars
+        showSnackBar={showSnackBar}
+        handleSnackbarClose={handleSnackbarClose}
+        text="Student Edited Successfully"
+        severity="success"
+      />
       <Button
         onClick={handleClickOpen}
         variant="contained"
@@ -50,6 +60,6 @@ export default function EditStudentModal({ student, handleUpdateStudent }) {
           </>
         </DialogContent>
       </Dialog>
-    </div>
+    </Box>
   );
 }

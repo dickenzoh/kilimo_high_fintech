@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StreamsTable from "../../components/Tables/StreamsTable";
 import { Box, Typography } from "@mui/material";
 import AddStreamModal from "../../components/Modals/AddStreamModal";
+import AddClassModal from "../../components/Modals/AddNewClass";
 
 const Streams = () => {
   const [streamData, setData] = useState([]);
@@ -39,7 +40,7 @@ const Streams = () => {
           color: "primary",
         }}
       >
-        <AddStreamModal />
+        <AddClassModal />
       </Box>
       <StreamsTable streamData={streamData} />
     </>

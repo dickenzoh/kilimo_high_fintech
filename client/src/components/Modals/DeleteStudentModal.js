@@ -1,21 +1,16 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Divider, Typography } from "@mui/material";
-import { useLocation, useParams } from "react-router-dom";
+import { Box, DialogContent, Typography } from "@mui/material";
+import CustomizedSnackbars from "../SnackBar/CustomizedSnackbar";
 
 export default function DeleteStudentModal({
   studentId,
   studentsData,
   setStudentsData,
 }) {
-  const [open, setOpen] = React.useState(false);
-
-  const location = useLocation();
+  const [open, setOpen] = useState(false);
+  const [showSnackBar, setShowSnackBar] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,20 +33,30 @@ export default function DeleteStudentModal({
         setStudentsData(
           studentsData.filter((student) => student._id != studentId)
         );
-        handleClose();
-        // Handle success, e.g., display a success message or update the student list
+        setShowSnackBar(true);
       } else {
         console.error("Error deleting student:", response.statusText);
-        // Handle error, e.g., display an error message
       }
     } catch (error) {
       console.error("Error deleting student:", error);
-      // Handle error, e.g., display an error message
     }
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackBar(false);
   };
 
   return (
     <Box>
+      <CustomizedSnackbars
+        showSnackBar={showSnackBar}
+        handleSnackbarClose={handleSnackbarClose}
+        text="Student Deleted Successfully"
+        severity="success"
+      />
       <Button
         onClick={handleClickOpen}
         variant="contained"

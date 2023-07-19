@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import useStyles from "./styles";
 import { useNavigate } from "react-router-dom";
+import CustomizedSnackbars from "../../components/SnackBar/CustomizedSnackbar";
 
 const initialState = {
   firstName: "",
@@ -21,6 +22,7 @@ const initialState = {
 const Register = () => {
   const [formData, setFormData] = useState(initialState);
   const [streamData, setStreamData] = useState([]);
+  const [showSnackBar, setShowSnackBar] = useState(false);
 
   const classes = useStyles();
   const navigate = useNavigate();
@@ -70,14 +72,20 @@ const Register = () => {
         // Handle success, e.g., display a success message or redirect
       } else {
         console.error("Error registering student:", response.statusText);
-        // Handle error, e.g., display an error message
       }
     } catch (error) {
       console.error("Error registering student:", error);
-      // Handle error, e.g., display an error message
     }
-    clear();
     navigate("/students");
+    clear();
+    setShowSnackBar(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackBar(false);
   };
 
   const handleChange = (e) => {
@@ -145,6 +153,12 @@ const Register = () => {
           </Grid>
         </form>
       </Paper>
+      <CustomizedSnackbars
+        showSnackBar={showSnackBar}
+        handleSnackbarClose={handleSnackbarClose}
+        text="Student Added Successfully"
+        severity="success"
+      />
     </Container>
   );
 };

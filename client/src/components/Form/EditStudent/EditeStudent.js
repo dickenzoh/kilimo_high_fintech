@@ -9,6 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Input from "../../Input/Input";
 import useStyles from "./styles";
+import CustomizedSnackbars from "../../SnackBar/CustomizedSnackbar";
 
 const initialState = {
   firstName: "",
@@ -19,8 +20,16 @@ const initialState = {
 
 const EditStudent = ({ student, handleClose, handleUpdateStudent }) => {
   const [updatedData, setUpdatedData] = useState(student);
+  const [showSnackBar, setShowSnackBar] = useState(false);
   const [streamData, setStreamData] = useState([]);
   const classes = useStyles();
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackBar(false);
+  };
 
   const handleEditStudent = async (e) => {
     e.preventDefault();
@@ -46,6 +55,7 @@ const EditStudent = ({ student, handleClose, handleUpdateStudent }) => {
         console.log("Student updated successfully!");
         handleClose();
         handleUpdateStudent(updatedData);
+        setShowSnackBar(true);
       } else {
         console.error("Error updating student:", response.statusText);
       }
@@ -76,6 +86,12 @@ const EditStudent = ({ student, handleClose, handleUpdateStudent }) => {
 
   return (
     <Container component="main" maxWidth="xs">
+      <CustomizedSnackbars
+        showSnackBar={showSnackBar}
+        handleSnackbarClose={handleSnackbarClose}
+        text="Student updated successfully!"
+        severity="success"
+      />
       <Paper className={classes.paper} elevation={3}>
         <Typography variant="h5">Edit Student</Typography>
         <form className={classes.form} onSubmit={handleEditStudent}>

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import StudentsTable from "../../components/Tables/StudentsTable";
+import CustomizedSnackbars from "../../components/SnackBar/CustomizedSnackbar";
+
 const StudentsPage = () => {
   const [studentsData, setStudentsData] = useState([]);
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleUpdateStudent = (updatedStudent) => {
     setStudentsData((prevStudents) =>
@@ -10,6 +13,10 @@ const StudentsPage = () => {
         student._id === updatedStudent._id ? updatedStudent : student
       )
     );
+  };
+
+  const showSnackbar = () => {
+    setSnackbarOpen(true);
   };
 
   useEffect(() => {
