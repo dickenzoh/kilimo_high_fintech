@@ -27,5 +27,8 @@ export default makeStyles((theme) => ({
       color: theme.palette.primary.main,
       marginLeft: theme.spacing(2),
     },
+    "& a:hover": {
+      color: theme.palette.success.main,
+    },
   },
 }));

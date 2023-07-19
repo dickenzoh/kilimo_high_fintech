@@ -44,7 +44,6 @@ const AddStream = ({ handleClose }) => {
         return;
       }
 
-      // Class name is unique, proceed to create the stream
       const createResponse = await fetch(
         "http://localhost:3008/streams/class-streams",
         {
