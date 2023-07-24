@@ -42,11 +42,13 @@ const StudentsPage = () => {
           </Typography>
         </Box>
       </Box>
-      <StudentsTable
-        studentsData={studentsData}
-        setStudentsData={setStudentsData}
-        handleUpdateStudent={handleUpdateStudent}
-      />
+      <Box sx={{ mb: 8, width: "90%" }}>
+        <StudentsTable
+          studentsData={studentsData}
+          setStudentsData={setStudentsData}
+          handleUpdateStudent={handleUpdateStudent}
+        />
+      </Box>
     </>
   );
 };

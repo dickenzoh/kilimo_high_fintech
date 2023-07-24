@@ -22,6 +22,8 @@ export default makeStyles((theme) => ({
   },
 
   links: {
+    display: "flex",
+    alignItems: "center",
     "& a": {
       textDecoration: "none",
       color: theme.palette.primary.main,
@@ -29,6 +31,12 @@ export default makeStyles((theme) => ({
     },
     "& a:hover": {
       color: theme.palette.success.main,
+    },
+  },
+  loginBtn: {
+    marginLeft: theme.spacing(2),
+    "& button:hover": {
+      backgroundColor: theme.palette.success.main,
     },
   },
 }));

@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MasterLayout from "./layouts/MasterLayout/MasterLayout";
 import Spinner from "./components/spinner/spinner";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LazyRegister = lazy(() => import("./pages/Register/Register"));
 const LazyStreams = lazy(() => import("./pages/Streams/Streams"));
@@ -14,6 +15,17 @@ const LazySingleStudentPage = lazy(() =>
 const LazyStudentsPage = lazy(() => import("./pages/Students/StudentsPage"));
 
 const App = () => {
+  const { loginWithPopup, user, isAuthenticated, isLoading, logout } =
+    useAuth0();
+  if (isAuthenticated) {
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"))
+      ? JSON.parse(localStorage.getItem("userDetails"))
+      : {};
+    userDetails["email"] = user.email;
+    userDetails["name"] = user.given_name;
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -68,11 +80,21 @@ const App = () => {
           }
         />
         <Route
-          path="/student/:id"
+          path="/student"
           element={
             <MasterLayout>
               <Suspense fallback={<Spinner />}>
                 <LazySingleStudentPage />
+              </Suspense>
+            </MasterLayout>
+          }
+        />
+        <Route
+          path="/singlestream"
+          element={
+            <MasterLayout>
+              <Suspense fallback={<Spinner />}>
+                <LazySingleStream />
               </Suspense>
             </MasterLayout>
           }
