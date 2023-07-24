@@ -28,16 +28,11 @@ const AddClassModal = () => {
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [error, setError] = useState("");
   const [streamData, setStreamData] = useState();
-  console.log(streamData);
 
   const navigate = useNavigate();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleCreate = async () => {
-    handleClose();
-  };
 
   const clear = () => {
     setStreamData({

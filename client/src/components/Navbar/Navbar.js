@@ -11,7 +11,7 @@ const Navbar = () => {
   const pages = ["Students", "Streams", "Register"];
 
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
+    <AppBar className={classes.appBar} position="sticky" color="#000">
       <div className={classes.brandContainer}>
         <Link to={{ pathname: "/" }}>Kilimo High School</Link>
       </div>

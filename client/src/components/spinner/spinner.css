@@ -1,0 +1,56 @@
+.sweet-loading {
+  position: relative;
+  width: 100%;
+  height: 55.6vh;
+  right: 0%;
+  top: 10%;
+  bottom: 0;
+  left: 0%;
+  background: transparent;
+  z-index: 999;
+}
+
+.sweet-loading span {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  position: relative;
+  top: 30%;
+}
+
+.sweet-loading .loader {
+  width: 8px;
+  height: 40px;
+  border-radius: 4px;
+  display: block;
+  margin: 20px auto;
+  position: relative;
+  background: currentColor;
+  color: #FF914E;
+  box-sizing: border-box;
+  animation: animloader 0.3s 0.3s linear infinite alternate;
+}
+
+.sweet-loading .loader::after, .sweet-loading .loader::before {
+  content: '';
+  width: 8px;
+  height: 40px;
+  border-radius: 4px;
+  background: currentColor;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  box-sizing: border-box;
+  animation: animloader 0.9s 0.85s linear infinite alternate;
+}
+
+.sweet-loading .loader::before {
+  left: -20px;
+  animation-delay: 0s;
+}
+
+@keyframes animloader {
+  0% { height: 48px; }
+  100% { height: 4px; }
+}
